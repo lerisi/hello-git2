@@ -2,214 +2,666 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World | Modern Landing Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050816">
+<title>Hello World — Beyond Imagination</title>
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050816;
+  --cyan: #22d3ee;
+  --purple: #a855f7;
+  --pink: #ec4899;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #f8fafc;
+  font-family: Inter, sans-serif;
+  overflow-x: hidden;
+}
+::selection { background: #a855f7; color: white; }
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
+#stars {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  z-index: -3; pointer-events: none;
+}
+.aurora {
+  position: fixed; z-index: -2;
+  width: 60vw; height: 60vw;
+  border-radius: 50%; filter: blur(110px);
+  opacity: .19; pointer-events: none;
+  animation: aurora 18s ease-in-out infinite alternate;
+}
+.a1 { background: #6d28d9; top: -35%; left: -15%; }
+.a2 { background: #0369a1; bottom: -35%; right: -15%; animation-delay: -7s; }
+.a3 { background: #be185d; top: 35%; left: 45%; opacity: .1; animation-delay: -11s; }
 
-    .gradient-text {
-      background: linear-gradient(90deg, #a78bfa, #60a5fa, #22d3ee);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+@keyframes aurora {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(10%,8%) scale(1.2); }
+  100% { transform: translate(-8%,12%) scale(.9); }
+}
+.grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(#64748b12 1px,transparent 1px),
+    linear-gradient(90deg,#64748b12 1px,transparent 1px);
+  background-size: 55px 55px;
+  mask-image: linear-gradient(to bottom,black,transparent 85%);
+  pointer-events: none;
+}
+.gradient-text {
+  background: linear-gradient(100deg,#fff 5%,#67e8f9 35%,#818cf8 65%,#e879f9 95%);
+  background-size: 200% auto;
+  background-clip: text; -webkit-background-clip: text;
+  color: transparent;
+  animation: text-shine 7s linear infinite;
+}
+@keyframes text-shine { to { background-position: 200% center; } }
 
-    .glow {
-      animation: float 6s ease-in-out infinite;
-    }
+.glass {
+  background: linear-gradient(135deg,#ffffff0c,#ffffff03);
+  border: 1px solid #ffffff16;
+  backdrop-filter: blur(18px);
+}
+.nav-link { transition: color .25s; }
+.nav-link:hover { color: #67e8f9; }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.05); }
-    }
+.reveal {
+  opacity: 0; transform: translateY(35px);
+  transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.hero-enter { animation: hero-in 1s cubic-bezier(.2,.8,.2,1) both; }
+.hero-delay-1 { animation-delay: .15s; }
+.hero-delay-2 { animation-delay: .3s; }
+.hero-delay-3 { animation-delay: .45s; }
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .fade-up {
-      opacity: 0;
-      animation: fadeUp 0.9s ease-out forwards;
-    }
+.orb-scene {
+  position: relative; width: min(390px,80vw); aspect-ratio: 1;
+  display: grid; place-items: center;
+  perspective: 1000px;
+}
+.orb-halo {
+  position: absolute; width: 95%; aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg,#22d3ee55,#a855f755,#ec489955,#22d3ee55);
+  filter: blur(55px);
+  animation: halo-pulse 5s ease-in-out infinite;
+}
+@keyframes halo-pulse {
+  0%,100% { transform: scale(.8); opacity: .55; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+.orb {
+  position: relative; width: 58%; aspect-ratio: 1; border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 25%,#ffffff 0%,#a5f3fc 4%,transparent 22%),
+    radial-gradient(ellipse at 30% 25%,#67e8f9,#2563eb 35%,#4c1d95 68%,#0f172a 100%);
+  box-shadow: inset -22px -25px 55px #020617a8,
+              inset 10px 10px 35px #ffffff80,
+              0 0 50px #3b82f688, 0 0 120px #8b5cf655;
+  animation: orb-float 5s ease-in-out infinite, orb-turn 18s linear infinite;
+}
+.orb::before {
+  content: ""; position: absolute; inset: 12%;
+  border-radius: 50%;
+  border: 1px solid #ffffff40;
+  background: repeating-linear-gradient(145deg,transparent 0 17px,#ffffff13 18px 19px);
+  transform: rotate(-20deg);
+}
+.orbit {
+  position: absolute; width: 115%; height: 35%;
+  border: 2px solid #67e8f9aa;
+  border-radius: 50%;
+  box-shadow: 0 0 16px #22d3ee66,inset 0 0 16px #a855f755;
+  transform: rotate(-28deg);
+  animation: orbit-spin 9s linear infinite;
+}
+.orbit.two {
+  width: 130%; height: 48%;
+  border-color: #e879f977;
+  transform: rotate(48deg);
+  animation-direction: reverse; animation-duration: 13s;
+}
+.orbit.three {
+  width: 105%; height: 65%;
+  border-color: #818cf866;
+  transform: rotate(75deg);
+  animation-duration: 22s;
+}
+@keyframes orb-float {
+  0%,100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-17px) rotate(5deg); }
+}
+@keyframes orb-turn { to { filter: hue-rotate(35deg); } }
+@keyframes orbit-spin { to { rotate: 360deg; } }
 
-    .delay-1 { animation-delay: 0.2s; }
-    .delay-2 { animation-delay: 0.4s; }
-    .delay-3 { animation-delay: 0.6s; }
+.float-item { animation: drift 5s ease-in-out infinite; }
+.float-item:nth-child(2n) { animation-delay: -2.5s; }
+@keyframes drift {
+  0%,100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-15px) rotate(7deg); }
+}
 
-    .glass {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(16px);
-    }
+.code-window {
+  transform: perspective(1000px) rotateY(-9deg) rotateX(4deg);
+  transition: transform .5s ease;
+}
+.code-window:hover { transform: perspective(1000px) rotateY(0) rotateX(0) translateY(-5px); }
+.code-line { opacity: 0; animation: code-in .45s ease forwards; }
+@keyframes code-in { to { opacity: 1; } }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-      }
-    }
-  </style>
+.action-btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.action-btn::before {
+  content: ""; position: absolute; inset: -100%;
+  background: linear-gradient(110deg,transparent 40%,#ffffff70 50%,transparent 60%);
+  transform: translateX(-100%) rotate(10deg);
+  transition: transform .65s ease; z-index: -1;
+}
+.action-btn:hover::before { transform: translateX(100%) rotate(10deg); }
+.action-btn:hover { box-shadow: 0 0 35px #8b5cf655; }
+
+.feature-card {
+  position: relative; overflow: hidden;
+  transform-style: preserve-3d;
+  transition: border-color .3s, box-shadow .3s;
+}
+.feature-card::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  opacity: 0; transition: opacity .3s;
+  background: radial-gradient(350px circle at var(--mx,50%) var(--my,50%),#8b5cf622,transparent 60%);
+}
+.feature-card:hover::before { opacity: 1; }
+.feature-card:hover { border-color: #a78bfa66; box-shadow: 0 20px 60px #0005,0 0 25px #8b5cf51a; }
+.feature-icon { transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.feature-card:hover .feature-icon { transform: translateY(-4px) scale(1.12) rotate(-7deg); }
+
+.pulse-dot { animation: dot-pulse 2s infinite; }
+@keyframes dot-pulse {
+  0%,100% { box-shadow: 0 0 0 0 #34d39988; }
+  50% { box-shadow: 0 0 0 7px #34d39900; }
+}
+.scroll-indicator { animation: scroll-bob 1.7s ease-in-out infinite; }
+@keyframes scroll-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+#cursor-glow {
+  position: fixed; z-index: -1; width: 300px; height: 300px;
+  border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle,#6366f117,transparent 68%);
+  transform: translate(-50%,-50%);
+}
+#toast {
+  opacity: 0; transform: translate(-50%,20px);
+  transition: .35s ease; pointer-events: none;
+}
+#toast.show { opacity: 1; transform: translate(-50%,0); }
+
+.progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: linear-gradient(90deg,#22d3ee,#818cf8,#e879f9);
+  z-index: 100; box-shadow: 0 0 12px #818cf8;
+}
+
+@media (max-width: 767px) {
+  .orb-scene { width: min(290px,72vw); }
+  .code-window { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
 </head>
 
-<body class="min-h-screen overflow-x-hidden bg-[#080b18] text-white">
+<body>
+<div class="progress" id="progress"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="aurora a1"></div>
+<div class="aurora a2"></div>
+<div class="aurora a3"></div>
+<div id="cursor-glow"></div>
 
-  <!-- Background effects -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden">
-    <div class="glow absolute -top-32 -left-32 h-96 w-96 rounded-full bg-purple-600/20 blur-[100px]"></div>
-    <div class="glow absolute top-1/3 -right-32 h-96 w-96 rounded-full bg-blue-500/20 blur-[120px]"
-         style="animation-delay: -3s"></div>
-    <div class="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-cyan-500/10 blur-[100px]"></div>
-  </div>
-
-  <!-- Navigation -->
-  <nav class="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-12">
-    <a href="#" class="flex items-center gap-3">
-      <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-cyan-400 font-bold shadow-lg shadow-violet-500/20">
-        H
-      </div>
-      <span class="text-lg font-bold tracking-wide">Hello<span class="text-violet-400">World</span></span>
+<!-- NAVIGATION -->
+<header class="fixed top-0 z-50 w-full border-b border-white/[.06] bg-[#050816]/70 backdrop-blur-xl">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-10">
+    <a href="#home" class="flex items-center gap-2.5 font-extrabold tracking-tight">
+      <span class="grid h-10 w-10 place-items-center rounded-xl border border-violet-400/30 bg-violet-500/15 text-xl text-cyan-300">✳</span>
+      <span class="text-lg">Hello<span class="text-cyan-300">World</span><span class="text-violet-400">.</span></span>
     </a>
 
-    <div class="hidden items-center gap-8 text-sm text-gray-400 md:flex">
-      <a href="#home" class="transition hover:text-white">Home</a>
-      <a href="#features" class="transition hover:text-white">Features</a>
-      <a href="#about" class="transition hover:text-white">About</a>
+    <div class="hidden items-center gap-8 text-sm text-slate-400 md:flex">
+      <a class="nav-link" href="#home">Home</a>
+      <a class="nav-link" href="#features">Features</a>
+      <a class="nav-link" href="#about">About</a>
     </div>
 
-    <a href="#features"
-       class="rounded-full border border-white/15 px-5 py-2.5 text-sm transition hover:border-violet-400 hover:bg-white/5">
-      Explore <span aria-hidden="true">↗</span>
+    <a href="#features" class="action-btn rounded-full border border-violet-400/40 bg-violet-500/10 px-5 py-2.5 text-sm font-semibold">
+      Let's Explore <span class="ml-1 text-cyan-300">↗</span>
     </a>
   </nav>
+</header>
 
-  <!-- Hero -->
-  <main id="home" class="relative z-10 flex min-h-[75vh] items-center justify-center px-6 py-20">
-    <div class="mx-auto max-w-4xl text-center">
+<!-- HERO -->
+<main id="home" class="relative">
+  <div class="grid-bg"></div>
 
-      <div class="fade-up mb-8 inline-flex items-center gap-2 rounded-full border border-violet-400/20 bg-violet-400/10 px-4 py-2 text-sm text-violet-200">
-        <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-400"></span>
-        Welcome to something beautiful
+  <section class="relative mx-auto grid min-h-screen max-w-7xl items-center gap-8 px-6 pb-20 pt-32 md:grid-cols-2 md:px-10 md:pt-28">
+
+    <div class="relative z-10 text-center md:text-left">
+      <div class="hero-enter hero-delay-1 mb-7 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[.06] px-4 py-2 text-xs font-medium tracking-wide text-emerald-300">
+        <span class="pulse-dot h-2 w-2 rounded-full bg-emerald-400"></span>
+        A NEW DIGITAL EXPERIENCE
       </div>
 
-      <h1 class="fade-up delay-1 text-5xl font-extrabold leading-tight tracking-tight sm:text-7xl md:text-8xl">
-        Hello,
-        <span class="gradient-text">World.</span>
+      <h1 class="hero-enter hero-delay-1 text-6xl font-black leading-[1.08] tracking-[-.06em] sm:text-7xl lg:text-[88px]">
+        Hello,<br>
+        <span class="gradient-text">World!</span>
+        <span class="inline-block animate-bounce text-4xl sm:text-5xl">✦</span>
       </h1>
 
-      <p class="fade-up delay-2 mx-auto mt-8 max-w-2xl text-base leading-8 text-gray-400 sm:text-lg">
-        A simple beginning. A beautiful experience.
-        <br class="hidden sm:block">
-        Let's turn your ideas into something extraordinary.
+      <p class="hero-enter hero-delay-2 mt-7 text-lg leading-8 text-slate-400 sm:text-xl">
+        A little bit of <span class="text-white">magic</span>.
+        A whole lot of <span class="text-cyan-300">possibilities.</span>
       </p>
 
-      <div class="fade-up delay-3 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a href="#features"
-           class="group rounded-full bg-gradient-to-r from-violet-600 to-blue-500 px-8 py-4 font-semibold shadow-lg shadow-violet-500/25 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-500/40">
-          Get Started
-          <span class="ml-2 inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-        </a>
-
-        <a href="#about"
-           class="rounded-full border border-white/15 px-8 py-4 font-semibold text-gray-300 transition hover:border-white/40 hover:bg-white/5">
-          Learn More
-        </a>
+      <div class="hero-enter hero-delay-2 mt-3 h-8 text-base text-slate-400">
+        Let's create <span id="typed" class="font-semibold text-violet-300"></span><span class="animate-pulse text-cyan-300">▍</span>
       </div>
 
-      <!-- Decorative indicator -->
-      <div class="mt-20 flex items-center justify-center gap-3 text-xs tracking-[0.3em] text-gray-500">
-        <span class="h-px w-10 bg-gradient-to-r from-transparent to-violet-400"></span>
-        CREATE · EXPLORE · INSPIRE
-        <span class="h-px w-10 bg-gradient-to-l from-transparent to-cyan-400"></span>
+      <div class="hero-enter hero-delay-3 mt-9 flex flex-wrap justify-center gap-4 md:justify-start">
+        <a href="#features" class="action-btn group rounded-full bg-gradient-to-r from-violet-600 via-indigo-500 to-cyan-500 px-7 py-4 font-bold shadow-lg shadow-violet-900/40">
+          Get Started <span class="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
+        </a>
+        <button id="surpriseBtn" class="action-btn rounded-full border border-white/15 bg-white/[.04] px-7 py-4 font-semibold text-slate-200 hover:border-cyan-400/40">
+          ✧ Surprise Me
+        </button>
+      </div>
+
+      <div class="hero-enter hero-delay-3 mt-12 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-500 md:justify-start">
+        <span>✦ Creative</span>
+        <span>⌘ Interactive</span>
+        <span>◈ Responsive</span>
+        <span>∞ Limitless</span>
       </div>
     </div>
-  </main>
 
-  <!-- Feature cards -->
-  <section id="features" class="relative z-10 mx-auto max-w-6xl px-6 py-16">
-    <div class="mb-12 text-center">
-      <p class="text-sm font-semibold uppercase tracking-[0.25em] text-violet-400">What makes it special</p>
-      <h2 class="mt-4 text-3xl font-bold sm:text-4xl">Simple. Modern. Beautiful.</h2>
+    <!-- ORB SCENE -->
+    <div class="hero-enter hero-delay-2 relative flex min-h-[350px] items-center justify-center md:min-h-[500px]">
+      <div class="orb-scene" id="orbScene">
+        <div class="orb-halo"></div>
+        <div class="orbit"></div>
+        <div class="orbit two"></div>
+        <div class="orbit three"></div>
+        <div class="orb"></div>
+
+        <div class="float-item absolute left-0 top-[15%] glass rounded-2xl px-4 py-3 shadow-2xl">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500">Status</div>
+          <div class="mt-1 flex items-center gap-2 text-sm font-semibold">
+            <span class="h-2 w-2 rounded-full bg-emerald-400"></span> All systems go
+          </div>
+        </div>
+
+        <div class="float-item absolute -right-2 top-[22%] glass rounded-2xl p-4 shadow-2xl">
+          <div class="text-2xl">⚡</div>
+          <div class="mt-1 text-xs text-cyan-300">Super fast</div>
+        </div>
+
+        <div class="float-item absolute bottom-[12%] left-[5%] glass rounded-2xl px-4 py-3 shadow-2xl">
+          <div class="text-xs text-slate-400">Your imagination</div>
+          <div class="mt-1 text-sm font-bold gradient-text">∞ Unlimited</div>
+        </div>
+
+        <div class="float-item absolute bottom-[14%] right-[0%] grid h-12 w-12 place-items-center rounded-2xl border border-pink-400/20 bg-pink-400/10 text-xl">
+          ✧
+        </div>
+      </div>
+
+      <!-- Floating code panel -->
+      <div class="code-window glass absolute -bottom-1 right-0 hidden w-64 rounded-2xl p-4 shadow-2xl lg:block">
+        <div class="mb-4 flex items-center gap-1.5 border-b border-white/10 pb-3">
+          <span class="h-2.5 w-2.5 rounded-full bg-rose-400"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+          <span class="ml-auto text-[10px] text-slate-500">index.html</span>
+        </div>
+        <div class="space-y-2 font-mono text-xs leading-5">
+          <div class="code-line" style="animation-delay:.5s"><span class="text-violet-300">&lt;html&gt;</span></div>
+          <div class="code-line pl-3" style="animation-delay:.8s"><span class="text-cyan-300">&lt;body&gt;</span></div>
+          <div class="code-line pl-6 text-white" style="animation-delay:1.1s">Hello, World!</div>
+          <div class="code-line pl-3" style="animation-delay:1.4s"><span class="text-cyan-300">&lt;/body&gt;</span></div>
+          <div class="code-line" style="animation-delay:1.7s"><span class="text-violet-300">&lt;/html&gt;</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="grid gap-5 md:grid-cols-3">
-
-      <article class="glass group rounded-2xl p-7 transition duration-300 hover:-translate-y-2 hover:border-violet-400/40">
-        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/15 text-2xl transition group-hover:scale-110">✦</div>
-        <h3 class="text-lg font-semibold">Modern Design</h3>
-        <p class="mt-3 text-sm leading-7 text-gray-400">Clean layouts, beautiful gradients, and elegant glass effects.</p>
-      </article>
-
-      <article class="glass group rounded-2xl p-7 transition duration-300 hover:-translate-y-2 hover:border-blue-400/40">
-        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/15 text-2xl transition group-hover:scale-110">⚡</div>
-        <h3 class="text-lg font-semibold">Smooth Animation</h3>
-        <p class="mt-3 text-sm leading-7 text-gray-400">Subtle motion and interactive hover effects bring the page to life.</p>
-      </article>
-
-      <article class="glass group rounded-2xl p-7 transition duration-300 hover:-translate-y-2 hover:border-cyan-400/40">
-        <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/15 text-2xl transition group-hover:scale-110">◎</div>
-        <h3 class="text-lg font-semibold">Fully Responsive</h3>
-        <p class="mt-3 text-sm leading-7 text-gray-400">A flexible design that adapts to desktop, tablet, and mobile screens.</p>
-      </article>
-
-    </div>
+    <a href="#features" class="scroll-indicator absolute bottom-7 left-1/2 -translate-x-1/2 text-center text-xs tracking-widest text-slate-500">
+      <span class="mb-2 block text-xl text-cyan-300">↓</span>
+      SCROLL TO EXPLORE
+    </a>
   </section>
+</main>
 
-  <!-- About -->
-  <section id="about" class="relative z-10 px-6 py-20 text-center">
-    <div class="glass mx-auto max-w-3xl rounded-3xl px-6 py-12 sm:px-12">
-      <p class="text-sm font-semibold tracking-widest text-cyan-400">EVERYTHING STARTS SOMEWHERE</p>
-      <h2 class="mt-5 text-3xl font-bold sm:text-4xl">Your next idea starts here.</h2>
-      <p class="mx-auto mt-5 max-w-xl leading-7 text-gray-400">
-        This is more than a Hello World page. It's a starting point for your next great project.
+<!-- FEATURES -->
+<section id="features" class="relative px-6 py-28 md:px-10">
+  <div class="mx-auto max-w-7xl">
+    <div class="reveal mb-14 text-center">
+      <span class="text-xs font-bold tracking-[.35em] text-cyan-300">BUILT TO IMPRESS</span>
+      <h2 class="mt-5 text-4xl font-extrabold tracking-tight sm:text-5xl">
+        Small details.<br><span class="gradient-text">Big impact.</span>
+      </h2>
+      <p class="mx-auto mt-5 max-w-xl leading-7 text-slate-400">
+        An immersive digital playground where design meets motion.
+        Every interaction is crafted to feel alive.
       </p>
-      <button id="helloBtn"
-        class="mt-8 rounded-full bg-white px-7 py-3 font-semibold text-gray-900 transition hover:scale-105 hover:bg-violet-100 active:scale-95">
-        Say Hello 👋
-      </button>
-      <p id="helloMessage" role="status" aria-live="polite" class="mt-5 min-h-6 text-violet-300"></p>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="relative z-10 border-t border-white/10 px-6 py-8 text-center text-sm text-gray-500">
-    <p>© 2026 HelloWorld. Crafted with <span class="text-pink-400">♥</span> and creativity.</p>
-  </footer>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <article class="feature-card reveal glass rounded-3xl p-7" style="transition-delay:0ms">
+        <div class="feature-icon mb-6 grid h-14 w-14 place-items-center rounded-2xl border border-violet-400/20 bg-violet-500/10 text-2xl text-violet-300">✧</div>
+        <h3 class="text-lg font-bold">Dreamy Design</h3>
+        <p class="mt-3 text-sm leading-7 text-slate-400">Aurora gradients, glass surfaces and a cosmic atmosphere.</p>
+        <div class="mt-6 text-sm font-semibold text-violet-300">Explore beauty ↗</div>
+      </article>
 
-  <script>
-    const button = document.getElementById('helloBtn');
-    const message = document.getElementById('helloMessage');
+      <article class="feature-card reveal glass rounded-3xl p-7" style="transition-delay:100ms">
+        <div class="feature-icon mb-6 grid h-14 w-14 place-items-center rounded-2xl border border-cyan-400/20 bg-cyan-500/10 text-2xl text-cyan-300">⌘</div>
+        <h3 class="text-lg font-bold">Alive Interactions</h3>
+        <p class="mt-3 text-sm leading-7 text-slate-400">Particles, typing effects, mouse reactions and smooth transitions.</p>
+        <div class="mt-6 text-sm font-semibold text-cyan-300">Feel the motion ↗</div>
+      </article>
 
-    button.addEventListener('click', () => {
-      message.textContent = 'Hello there! ✨ Have a wonderful day!';
-      message.animate(
-        [
-          { opacity: 0, transform: 'translateY(8px)' },
-          { opacity: 1, transform: 'translateY(0)' }
-        ],
-        { duration: 500, easing: 'ease-out' }
-      );
+      <article class="feature-card reveal glass rounded-3xl p-7" style="transition-delay:200ms">
+        <div class="feature-icon mb-6 grid h-14 w-14 place-items-center rounded-2xl border border-emerald-400/20 bg-emerald-500/10 text-2xl text-emerald-300">◈</div>
+        <h3 class="text-lg font-bold">Every Screen</h3>
+        <p class="mt-3 text-sm leading-7 text-slate-400">Responsive layouts that adapt to desktop, tablet and mobile.</p>
+        <div class="mt-6 text-sm font-semibold text-emerald-300">Go anywhere ↗</div>
+      </article>
+
+      <article class="feature-card reveal glass rounded-3xl p-7" style="transition-delay:300ms">
+        <div class="feature-icon mb-6 grid h-14 w-14 place-items-center rounded-2xl border border-pink-400/20 bg-pink-500/10 text-2xl text-pink-300">⚡</div>
+        <h3 class="text-lg font-bold">Make It Yours</h3>
+        <p class="mt-3 text-sm leading-7 text-slate-400">One HTML file, easy to customize, with no build process.</p>
+        <div class="mt-6 text-sm font-semibold text-pink-300">Start creating ↗</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE SECTION -->
+<section id="about" class="relative px-6 py-24 md:px-10">
+  <div class="mx-auto max-w-5xl">
+    <div class="reveal glass relative overflow-hidden rounded-[2rem] p-8 text-center sm:p-16">
+      <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-violet-500/20 blur-[90px]"></div>
+      <div class="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-cyan-500/15 blur-[90px]"></div>
+
+      <div class="relative">
+        <div class="mb-5 text-4xl">✦</div>
+        <p class="text-xs font-bold tracking-[.35em] text-violet-300">THE NEXT CHAPTER</p>
+        <h2 class="mt-5 text-3xl font-extrabold sm:text-5xl">
+          Ready to make<br><span class="gradient-text">something amazing?</span>
+        </h2>
+        <p class="mx-auto mt-5 max-w-lg leading-7 text-slate-400">
+          Every great project starts with a single step.
+          Let's make this one unforgettable.
+        </p>
+        <button id="helloBtn" class="action-btn mt-8 rounded-full bg-white px-8 py-4 font-bold text-slate-950 hover:bg-cyan-100">
+          Say Hello <span class="ml-2">✦</span>
+        </button>
+        <p id="helloMessage" role="status" aria-live="polite" class="mt-6 min-h-7 text-cyan-300"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-white/[.08] px-6 py-8 text-center text-sm text-slate-500">
+  <p>Crafted with <span class="text-pink-400">♥</span> and a little cosmic magic.</p>
+  <p class="mt-2 text-xs">© 2026 HelloWorld Studio</p>
+</footer>
+
+<div id="toast" role="status" class="glass fixed bottom-7 left-1/2 z-[90] rounded-full px-6 py-4 text-sm shadow-2xl">
+  ✨ You just discovered a little magic!
+</div>
+
+<script>
+/* 1. PARTICLE UNIVERSE */
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let stars = [], w = 0, h = 0, dpr = 1;
+const pointer = { x: -1000, y: -1000 };
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function resizeCanvas() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  w = window.innerWidth; h = window.innerHeight;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const count = Math.min(130, Math.floor(w * h / 9000));
+  stars = Array.from({ length: count }, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 1.7 + .3,
+    speed: Math.random() * .35 + .08,
+    alpha: Math.random() * .65 + .2,
+    phase: Math.random() * Math.PI * 2
+  }));
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function drawStars(time = 0) {
+  ctx.clearRect(0, 0, w, h);
+  stars.forEach(s => {
+    if (!reducedMotion) s.y -= s.speed;
+    if (s.y < -5) { s.y = h + 5; s.x = Math.random() * w; }
+
+    const dx = pointer.x - s.x, dy = pointer.y - s.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    let px = s.x, py = s.y;
+
+    if (distance < 150 && distance > 0) {
+      px -= dx / distance * (150 - distance) * .06;
+      py -= dy / distance * (150 - distance) * .06;
+    }
+
+    const twinkle = reducedMotion ? 1 :
+      .65 + .35 * Math.sin(time * .0015 + s.phase);
+
+    ctx.beginPath();
+    ctx.arc(px, py, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(170,190,255,${s.alpha * twinkle})`;
+    ctx.fill();
+
+    if (distance < 110) {
+      ctx.beginPath();
+      ctx.moveTo(px, py);
+      ctx.lineTo(pointer.x, pointer.y);
+      ctx.strokeStyle = `rgba(103,232,249,${(1 - distance / 110) * .18})`;
+      ctx.lineWidth = .6;
+      ctx.stroke();
+    }
+  });
+
+  if (!reducedMotion) requestAnimationFrame(drawStars);
+}
+drawStars();
+
+/* 2. MOUSE GLOW + PARALLAX */
+const cursorGlow = document.getElementById('cursor-glow');
+const orbScene = document.getElementById('orbScene');
+
+window.addEventListener('pointermove', e => {
+  pointer.x = e.clientX;
+  pointer.y = e.clientY;
+  cursorGlow.style.left = e.clientX + 'px';
+  cursorGlow.style.top = e.clientY + 'px';
+
+  if (!reducedMotion && e.pointerType === 'mouse' &&
+      window.matchMedia('(min-width: 768px)').matches) {
+    const rx = (e.clientX / window.innerWidth - .5);
+    const ry = (e.clientY / window.innerHeight - .5);
+    orbScene.style.transform =
+      `translate(${rx * 10}px,${ry * 10}px)`;
+  }
+});
+
+window.addEventListener('pointerleave', () => {
+  pointer.x = -1000; pointer.y = -1000;
+});
+
+/* 3. TYPEWRITER */
+const typed = document.getElementById('typed');
+const phrases = [
+  'something extraordinary.',
+  'a brighter future.',
+  'your next big idea.',
+  'the impossible.'
+];
+let phraseIndex = 0, charIndex = 0, deleting = false;
+
+function typeLoop() {
+  if (reducedMotion) {
+    typed.textContent = phrases[0];
+    return;
+  }
+
+  const phrase = phrases[phraseIndex];
+  typed.textContent = phrase.slice(0, charIndex);
+  let delay = deleting ? 35 : 65;
+
+  if (!deleting && charIndex < phrase.length) {
+    charIndex++;
+  } else if (!deleting) {
+    deleting = true;
+    delay = 1300;
+  } else if (charIndex > 0) {
+    charIndex--;
+  } else {
+    deleting = false;
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    delay = 350;
+  }
+
+  setTimeout(typeLoop, delay);
+}
+typeLoop();
+
+/* 4. SCROLL REVEAL */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: .12 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* 5. TILT CARDS + TRACKING LIGHT */
+document.querySelectorAll('.feature-card').forEach(card => {
+  card.addEventListener('pointermove', e => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    card.style.setProperty('--mx', x + 'px');
+    card.style.setProperty('--my', y + 'px');
+
+    if (e.pointerType === 'mouse' && !reducedMotion) {
+      const dx = (x / r.width - .5) * 5;
+      const dy = (.5 - y / r.height) * 5;
+      card.style.transform =
+        `perspective(800px) rotateY(${dx}deg) rotateX(${dy}deg) translateY(-4px)`;
+    }
+  });
+
+  card.addEventListener('pointerleave', () => {
+    card.style.transform = '';
+  });
+});
+
+/* 6. MAGNETIC BUTTONS */
+if (!reducedMotion && window.matchMedia('(min-width: 768px)').matches) {
+  document.querySelectorAll('.action-btn').forEach(btn => {
+    btn.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      const r = btn.getBoundingClientRect();
+      const dx = e.clientX - r.left - r.width / 2;
+      const dy = e.clientY - r.top - r.height / 2;
+      btn.style.transform = `translate(${dx * .07}px,${dy * .12}px)`;
     });
-  </script>
+    btn.addEventListener('pointerleave', () => {
+      btn.style.transform = '';
+    });
+  });
+}
 
+/* 7. SCROLL PROGRESS */
+window.addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const percent = max > 0 ? window.scrollY / max * 100 : 0;
+  document.getElementById('progress').style.width = percent + '%';
+}, { passive: true });
+
+/* 8. TOAST + SURPRISE */
+let toastTimer;
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+document.getElementById('surpriseBtn').addEventListener('click', () => {
+  const colors = [
+    ['#050816','#312e81'],
+    ['#080816','#164e63'],
+    ['#12051e','#701a75'],
+    ['#06121b','#064e3b']
+  ];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  document.body.style.background =
+    `radial-gradient(ellipse at 50% 30%,${color[1]},${color[0]} 70%)`;
+  showToast('✦ A new universe, just for you!');
+});
+
+document.getElementById('helloBtn').addEventListener('click', () => {
+  const message = document.getElementById('helloMessage');
+  message.textContent = 'Hello, amazing human! ✨ Keep creating.';
+  message.animate([
+    { opacity: 0, transform: 'translateY(12px) scale(.96)' },
+    { opacity: 1, transform: 'translateY(0) scale(1)' }
+  ], { duration: 550, easing: 'cubic-bezier(.2,.8,.2,1)' });
+
+  showToast('💜 Hello there! Have an amazing day!');
+});
+</script>
 </body>
 </html>
